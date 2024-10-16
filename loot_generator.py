@@ -1,10 +1,11 @@
-from loot_table import LootTable
-from gem_table import GemTable
+from gems_table import GemsTable
+from extraordinary_items_table import ExtraordinaryItemsTable
 
 class LootGenerator:
     def __init__(self):
         self.tables = {}
-        self.tables["Gems"] = GemTable()
+        self.tables["Gems"] = GemsTable()
+        self.tables["Extraordinary Items"] = ExtraordinaryItemsTable()
 
     # def add_table(self, table_name, items):
     #     self.tables[table_name] = LootTable(table_name, items)
@@ -51,9 +52,32 @@ loot_generator = LootGenerator()
 
 # Example of generating loot
 def main():
-    category = input("Enter loot category (Common Loot, Uncommon Loot, Rare Loot): ")
-    loot = loot_generator.generate_loot(category)
-    print(f"You found: {loot}")
+    item_banner = ""
+
+    while(True):
+        print("==========================================")
+        print("1) Gems")
+        print("2) Extraordinary Items")
+        print("3) Magic Items")
+        print("4) Exit")
+        print("==========================================")
+        print(item_banner)
+        option = input("Select one of the above options (1-4): ")
+        
+        if option == "1":
+            loot = loot_generator.generate_loot("Gems")
+            item_banner = "\nYou found: " + loot + "\n"
+        elif option == "2":
+            loot = loot_generator.generate_loot("Extraordinary Items")
+            item_banner = "\nYou found: " + loot + "\n"
+        elif option == "3":
+            loot = loot_generator.generate_loot("Magic Items")
+            item_banner = "\nYou found: " + loot + "\n"
+        elif option == "4":
+            print(f"Goodbye!")
+            break
+        else:
+            item_banner = ""
 
 if __name__ == "__main__":
     main()
