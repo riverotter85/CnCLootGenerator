@@ -1,26 +1,49 @@
 from loot_table import LootTable
 
 class ExtraordinaryItemsTable(LootTable):
-    # Asterisk denotes that the type is the Castle Keeper's choice, and that the value varies (show this info to user)
     expert_weapons = [
-        (1, 5, ("10 arrows*", "1 gp")),
+        (1, 5, [("20 arrows", "20 gp"),
+                ("12 arrows", "2 gp"),
+                ("2 silver arrows", "20 gp")]),
         (6, 10, ("battle axe", "100 gp")),
-        (11, 15, ("bolt*", "12 sp")),
-        (16, 20, ("bow*", "Varies")),
-        (21, 25, ("crossbow*", "Varies")),
+        (11, 15, ("12 bolts", "10 gp")),
+        (16, 20, [("long bow", "750 gp"),
+                  ("long composite bow", "1000 gp"),
+                  ("short bow", "300 gp"),
+                  ("short composite bow", "750 gp")]),
+        (21, 25, [("light crossbow", "350 gp"),
+                  ("hand crossbow", "1000 gp"),
+                  ("heavy crossbow", "500 gp")]),
         (26, 30, ("dagger", "20 gp")),
         (31, 35, ("dart", "5 gp")),
-        (36, 40, ("flail*", "Varies")),
+        (36, 40, [("heavy flail", "150 gp"),
+                  ("light flail", "80 gp")]),
         (41, 45, ("halberd", "100 gp")),
-        (46, 50, ("hammer*", "Varies")),
+        (46, 50, [("light hammer", "10 gp"),
+                  ("war hammer", "60 gp")]),
         (51, 55, ("hand axe", "40 gp")),
         (56, 60, ("javelin", "10 gp")),
-        (61, 65, ("lance*", "Varies")),
-        (66, 70, ("mace*", "Varies")),
+        (61, 65, [("heavy lance", "100 gp"),
+                  ("light lance", "60 gp")]),
+        (66, 70, [("heavy mace", "120 gp"),
+                  ("large mace", "250 gp"),
+                  ("light mace", "50 gp")]),
         (71, 75, ("morningstar", "80 gp")),
         (76, 80, ("scimitar", "150 gp")),
-        (81, 85, ("spear*", "Varies")),
-        (86, 90, ("sword*", "Varies")),
+        (81, 85, [("spear", "10 gp"),
+                  ("long spear", "50 gp"),
+                  ("wolf spear", "30 gp")]),
+        (86, 90, [("bastard sword", "250 gp"),
+                  ("broad sword", "120 gp"),
+                  ("falchion sword", "400 gp"),
+                  ("flamberg sword", "750 gp"),
+                  ("hook sword", "250 gp"),
+                  ("long sword", "150 gp"),
+                  ("9 ring broad sword", "300 gp"),
+                  ("rapier sword", "200 gp"),
+                  ("great scimitar sword", "550 gp"),
+                  ("short sword", "100 gp"),
+                  ("two-handed sword", "300 gp")]),
         (91, 95, ("trident", "100 gp")),
         (96, 100, ("two-Handed axe", "300 gp"))
     ]
@@ -32,7 +55,7 @@ class ExtraordinaryItemsTable(LootTable):
         (16, 20, ("bracelet", "")),
         (21, 25, ("broach", "")),
         (26, 30, ("buckle", "")),
-        (31, 35, ("button (usually 2-4, each worth 1 gp)", "")),
+        (31, 35, ("button(s)", "")),
         (36, 40, ("collar", "")),
         (41, 45, ("choker", "")),
         (46, 50, ("earrings", "")),
@@ -47,7 +70,6 @@ class ExtraordinaryItemsTable(LootTable):
         (91, 95, ("torque", "")),
         (96, 100, ("waist chain", ""))
     ]
-
 
     worn_and_ceremonial_items = [
         (1, 5, ("coronet", "")),
@@ -72,19 +94,19 @@ class ExtraordinaryItemsTable(LootTable):
         (96, 100, ("tabard", "2d10"))
     ]
 
-
     hand_crafted_items = [
         (1, 5, ("wooden bird cage", "20 gp")),
         (6, 10, ("ivory pipe", "50 gp")),
-        (11, 15, ("paper, ink, and quill (in scroll case or box)", "15 gp")),
+        (11, 15, [("paper, ink, and quill (in scroll case)", "15 gp"),
+                  ("paper, ink, and quill (in box)", "15 gp")]),
         (16, 20, ("silver snuff box", "100 gp")),
         (21, 25, ("mechanical toy", "2d10")),
-        (26, 30, ("china place settings (1-12, each worth 2 gp)", "2d6x10")),
+        (26, 30, ("china place settings", "2d6x10")),
         (31, 35, ("crystal vase", "10d10")),
         (36, 40, ("pewter goblet", "2 gp")),
         (41, 45, ("silver-plated trencher", "4 gp")),
         (46, 50, ("wooden gourd", "1 gp")),
-        (51, 55, ("golden harp", "")),
+        (51, 55, ("harp", "")),
         (56, 60, ("hunter's horn", "")),
         (61, 65, ("lute of vaughn", "120 gp")),
         (66, 70, ("elven mandolin", "100 gp")),
@@ -95,7 +117,6 @@ class ExtraordinaryItemsTable(LootTable):
         (91, 95, ("carved wood", "")),
         (96, 100, ("miniature figurine", ""))
     ]
-
 
     antiquities = [
         (1, 5, ("book(s)", "10d10")),
@@ -181,9 +202,10 @@ class ExtraordinaryItemsTable(LootTable):
         if gp_value == "":
             roll = self.roll_percentile()
             value_item = self.search_items(roll, self.extraordinary_item_tables["values"])
-            gp_value = value_item[1] + " (" + value_item[0] + ")"
+            item = value_item[0] + " " + item
+            gp_value = value_item[1]
         elif "d" in gp_value:
             gp_value = self.roll_dice(gp_value) + " gp"
             
 
-        return item + " (value: " + gp_value + ")"
+        return item + " (" + gp_value + ")"

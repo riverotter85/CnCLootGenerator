@@ -22,4 +22,4 @@ class GemsTable(LootTable):
         gems_tier = self.search_items(gems_tier_roll, self.table)
         gem = random.choice(gems_tier[0])
 
-        return gem + " (value: " + gems_tier[1] + ")"
+        return gem + " (" + gems_tier[1] + ")"

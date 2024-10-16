@@ -28,5 +28,7 @@ class LootTable:
     def search_items(i, items):
         for start, end, item in items:
             if start <= i <= end:
+                if isinstance(item, list):
+                    item = random.choice(item) # We've hit a sub-list, so pick one of the items at random
                 return item
         return None
