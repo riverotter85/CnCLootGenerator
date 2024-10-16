@@ -1,10 +1,9 @@
-import random
 from loot_table import LootTable
 
 class ExtraordinaryItemsTable(LootTable):
     # Asterisk denotes that the type is the Castle Keeper's choice, and that the value varies (show this info to user)
     expert_weapons = [
-        (1, 5, ("arrow*", "1 gp")),
+        (1, 5, ("10 arrows*", "1 gp")),
         (6, 10, ("battle axe", "100 gp")),
         (11, 15, ("bolt*", "12 sp")),
         (16, 20, ("bow*", "Varies")),
