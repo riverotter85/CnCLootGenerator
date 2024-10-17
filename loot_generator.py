@@ -1,11 +1,13 @@
 from gems_table import GemsTable
 from extraordinary_items_table import ExtraordinaryItemsTable
+from magic_items_table import MagicItemsTable
 
 class LootGenerator:
     def __init__(self):
         self.tables = {}
         self.tables["Gems"] = GemsTable()
         self.tables["Extraordinary Items"] = ExtraordinaryItemsTable()
+        self.tables["Magic Items"] = MagicItemsTable()
 
     # def add_table(self, table_name, items):
     #     self.tables[table_name] = LootTable(table_name, items)

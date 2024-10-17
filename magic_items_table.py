@@ -100,21 +100,41 @@ class MagicItemsTable(LootTable):
     ]
 
     special_swords = [
-        (1, 8, ("bane sword", "13500 gp", "4500")),
-        (9, 16, ("sword of dancing", "12500 gp", "4100")),
-        (17, 24, ("sword of defending", "24500 gp", "8100")),
-        (25, 32, ("dragon slayer", "29000 gp", "7250")),
-        (33, 36, ("featheredged sword", "31750 gp", "15000")),
-        (37, 44, ("flaming sword", "7750 gp", "2000")),
-        (45, 52, ("frost bane", "13725 gp", "3000")),
-        (53, 56, ("holy avenger", "55000 gp", "27000")),
-        (57, 60, ("sword of life stealing", "17000 gp", "5600")),
-        (61, 68, ("luck blade", "21500 gp", "7100")),
-        (69, 72, ("nine lives stealer", "8500 gp", "2800")),
-        (73, 80, ("sword of puncturing", "12000 gp", "3000")),
-        (81, 88, ("sylvan sword", "10000 gp", "3000")),
-        (89, 92, ("vorpal sword", "38750 gp", "19000")),
-        (93, 100, ("sword of wounding", "16000 gp", "5300"))
+        (1, 8, [("+3 bane sword of undead", "13500 gp", "4500"), # Making duplicate entries because I don't want a proper table for this
+                ("+3 bane sword of spell-casters", "13500 gp", "4500"),
+                ("+3 bane sword of orcs", "13500 gp", "4500"),
+                ("+3 bane sword of orcs", "13500 gp", "4500"),
+                ("+3 bane sword of goblins", "13500 gp", "4500"),
+                ("+3 bane sword of goblins", "13500 gp", "4500"),
+                ("+3 bane sword of giants", "13500 gp", "4500"),
+                ("+3 bane sword of giants", "13500 gp", "4500"),
+                ("+3 bane sword of lycanthropes", "13500 gp", "4500"),
+                ("+3 bane sword of lycanthropes", "13500 gp", "4500"),
+                ("+3 bane sword of demons/devils", "13500 gp", "4500"),
+                ("+3 bane sword of dragons", "13500 gp", "4500")]),
+        (9, 16, ("+2 sword of dancing", "12500 gp", "4100")),
+        (17, 24, ("+4 sword of defending", "24500 gp", "8100")),
+        (25, 32, [("+2/+4 black dragon slayer", "29000 gp", "7250"),
+                  ("+2/+4 blue dragon slayer", "29000 gp", "7250"),
+                  ("+2/+4 green dragon slayer", "29000 gp", "7250"),
+                  ("+2/+4 red dragon slayer", "29000 gp", "7250"),
+                  ("+2/+4 white dragon slayer", "29000 gp", "7250"),
+                  ("+2/+4 brass dragon slayer", "29000 gp", "7250"),
+                  ("+2/+4 bronze dragon slayer", "29000 gp", "7250"),
+                  ("+2/+4 copper dragon slayer", "29000 gp", "7250"),
+                  ("+2/+4 gold dragon slayer", "29000 gp", "7250"),
+                  ("+2/+4 silver dragon slayer", "29000 gp", "7250")]),
+        (33, 36, ("+3 featheredged sword", "31750 gp", "15000")),
+        (37, 44, ("+2 flaming sword", "7750 gp", "2000")),
+        (45, 52, ("+3 frost brand", "13725 gp", "3000")),
+        (53, 56, ("+2 (+5) holy avenger", "55000 gp", "27000")),
+        (57, 60, ("+2 sword of life stealing", "17000 gp", "5600")),
+        (61, 68, ("+2 luck blade", "21500 gp", "7100")),
+        (69, 72, ("+2 nine lives stealer", "8500 gp", "2800")),
+        (73, 80, ("+2 sword of puncturing", "12000 gp", "3000")),
+        (81, 88, ("+3 sylvan sword", "10000 gp", "3000")),
+        (89, 92, ("+4 vorpal sword", "38750 gp", "19000")),
+        (93, 100, ("+3 sword of wounding", "16000 gp", "5300"))
     ]
 
     miscellaneous_weapons = [
@@ -146,22 +166,22 @@ class MagicItemsTable(LootTable):
     ]
 
     special_miscellaneous_weapons = [
-        (1, 8, ("bane weapon", "13500 gp", "4500")),
+        (1, 8, ("+3 bane weapon", "13500 gp", "4500")),
         (9, 11, ("club of dagda", "10000 gp", "4000")),
-        (12, 15, ("dagger of venom", "4750 gp", "1070")),
-        (16, 24, ("dwarven thrower", "18000 gp", "6000")),
-        (25, 28, ("featheredged axe", "31750 gp", "15000")),
+        (12, 15, ("+1 dagger of venom", "4750 gp", "1070")),
+        (16, 24, ("+2 (+3) dwarven thrower", "18000 gp", "6000")),
+        (25, 28, ("+3 featheredged axe", "31750 gp", "15000")),
         (29, 36, ("javelin of lightning", "4500 gp", "450")),
-        (37, 40, ("mace of disruption", "25500 gp", "8500")),
-        (41, 48, ("mace of smiting", "17500 gp", "5800")),
-        (49, 56, ("mace of terror", "8500 gp", "2100")),
-        (57, 60, ("nine lives stealer", "8500 gp", "2800")),
-        (61, 64, ("oath bow", "25000 gp", "5000")),
-        (65, 68, ("slaying arrow/bolt", "9500 gp", "2300")),
-        (69, 76, ("sleep arrow/bolt", "1250 gp", "350")),
-        (77, 84, ("sylvan weapon", "10000 gp", "3000")),
-        (85, 92, ("trident of fish command", "5000 gp", "1200")),
-        (93, 100, ("weapon of wounding", "16000 gp", "5300"))
+        (37, 40, ("+3 mace of disruption", "25500 gp", "8500")),
+        (41, 48, ("+3 mace of smiting", "17500 gp", "5800")),
+        (49, 56, ("+2 mace of terror", "8500 gp", "2100")),
+        (57, 60, ("+2 nine lives stealer", "8500 gp", "2800")),
+        (61, 64, ("+2 oath bow", "25000 gp", "5000")),
+        (65, 68, ("+1 slaying arrow/bolt", "9500 gp", "2300")),
+        (69, 76, ("+1 sleep arrow/bolt", "1250 gp", "350")),
+        (77, 84, ("+3 sylvan weapon", "10000 gp", "3000")),
+        (85, 92, ("+1 trident of fish command", "5000 gp", "1200")),
+        (93, 100, ("+3 weapon of wounding", "16000 gp", "5300"))
     ]
 
     armor_and_shields = [
@@ -178,11 +198,11 @@ class MagicItemsTable(LootTable):
     ]
 
     random_shield_type = [
-        (1, 40, "animated shield"),
-        (41, 70, "bashing shield"),
-        (71, 85, "blinding shield"),
-        (86, 95, "lion's shield"),
-        (96, 100, "shield of the cid")
+        (1, 40, ("animated shield", "1000 gp", "250")),
+        (41, 70, ("+1 shield of bashing", "1000 gp", "250")),
+        (71, 85, ("blinding shield", "1000 gp", "250")),
+        (86, 95, ("+2 lion's shield", "4000 gp", "750")),
+        (96, 100, ("+2 shield of the cid", "4000 gp", "750"))
     ]
 
     armor = [
@@ -203,13 +223,17 @@ class MagicItemsTable(LootTable):
     ]
 
     random_armor_type = [
-        (1, 9, "armor of kavacha"),
-        (10, 18, "cold/fire resistance"),
-        (19, 36, "dwarven plate"),
-        (37, 54, "elven chain"),
-        (55, 64, "plate of etherealness"),
-        (65, 82, "plate armor of the deep"),
-        (83, 100, "spell resistance")
+        (1, 9, ("+3 armor of kavacha", "9000 gp", "1200")),
+        (10, 18, [("+2 armor of cold resistance", "4000 gp", "750"),
+                  ("+2 armor of fire resistance", "4000 gp", "750")]),
+        (19, 36, ("+4 dwarven plate", "16000 gp", "1750")),
+        (37, 54, ("+5 elven chain", "25000 gp", "2500")),
+        (55, 64, ("+3 armor of etherealness", "9000 gp", "1200")),
+        (65, 82, ("+1 plate armor of the deep", "1000 gp", "250")),
+        (83, 100, [("+1 armor of spell resistance", "10000 gp", "1000"),
+                   ("+2 armor of spell resistance", "20000 gp", "2000"),
+                   ("+5 armor of spell resistance", "50000 gp", "5000"),
+                   ("+8 armor of spell resistance", "80000 gp", "8000")])
     ]
 
     miscellaneous_magic = [
@@ -638,26 +662,27 @@ class MagicItemsTable(LootTable):
         self.magic_item_tables["potions"] = MagicItemsTable.potions
         self.magic_item_tables["scrolls"] = MagicItemsTable.scrolls
         self.magic_item_tables["weapons"] = MagicItemsTable.weapons
+        self.magic_item_tables["armor & shields"] = MagicItemsTable.armor_and_shields
+        self.magic_item_tables["miscellaneous magic"] = MagicItemsTable.miscellaneous_magic
+        self.magic_item_tables["rings"] = MagicItemsTable.rings
+        self.magic_item_tables["rods, staves, wands"] = MagicItemsTable.rods_staves_wands
+        self.magic_item_tables["cursed items"] = MagicItemsTable.cursed_items
+        self.magic_item_tables["artifacts"] = MagicItemsTable.artifacts
+
         self.magic_item_tables["swords"] = MagicItemsTable.swords
-        self.magic_item_tables["weapon/armor bonus"] = MagicItemsTable.weapon_bonus
+        self.magic_item_tables["weapon/armor bonus"] = MagicItemsTable.weapon_armor_bonus
         self.magic_item_tables["special swords"] = MagicItemsTable.special_swords
         self.magic_item_tables["miscellaneous weapons"] = MagicItemsTable.miscellaneous_weapons
         self.magic_item_tables["special miscellaneous weapons"] = MagicItemsTable.special_miscellaneous_weapons
-        self.magic_item_tables["armor & shields"] = MagicItemsTable.armor_and_shields
         self.magic_item_tables["shield"] = MagicItemsTable.shield
         self.magic_item_tables["random shield type"] = MagicItemsTable.random_shield_type
         self.magic_item_tables["armor"] = MagicItemsTable.armor
         self.magic_item_tables["random armor type"] = MagicItemsTable.random_armor_type
-        self.magic_item_tables["miscellaneous magic"] = MagicItemsTable.miscellaneous_magic
         self.magic_item_tables["miscellaneous a"] = MagicItemsTable.miscellaneous_a
         self.magic_item_tables["miscellaneous b"] = MagicItemsTable.miscellaneous_b
         self.magic_item_tables["miscellaneous c"] = MagicItemsTable.miscellaneous_c
         self.magic_item_tables["miscellaneous d"] = MagicItemsTable.miscellaneous_d
         self.magic_item_tables["miscellaneous e"] = MagicItemsTable.miscellaneous_e
-        self.magic_item_tables["rings"] = MagicItemsTable.rings
-        self.magic_item_tables["rods, staves, wands"] = MagicItemsTable.rods_staves_wands
-        self.magic_item_tables["cursed items"] = MagicItemsTable.cursed_items
-        self.magic_item_tables["artifacts"] = MagicItemsTable.artifacts
 
     def roll(self):
         roll = self.roll_percentile()
@@ -666,11 +691,107 @@ class MagicItemsTable(LootTable):
         roll = self.roll_percentile()
         magic_item = self.search_items(roll, self.magic_item_tables[magic_item_tier])
 
-        # NOTE: Keep a close eye on this section; note that there is a lot of extra logic to have the above tables talking to each other
-        item = magic_item[0]
-        gp_value = magic_item[1]
-        if "d" in gp_value:
-            gp_value = self.roll_dice(gp_value) + " gp"
-            
+        if magic_item_tier == "weapons":
+            if magic_item == "swords":
+                roll = self.roll_percentile()
+                result = self.search_items(roll, self.magic_item_tables["swords"])
 
-        return item + " (value: " + gp_value + ")"
+                roll = self.roll_percentile()
+                weapon_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
+
+                magic_item = weapon_bonus[0] + " " + result
+                gp_value = weapon_bonus[1] + ", " + weapon_bonus[2] + " xp"
+
+            elif magic_item == "special swords":
+                roll = self.roll_percentile()
+                result = self.search_items(roll, self.magic_item_tables["special swords"])
+
+                roll = self.roll_percentile()
+                sword_type = self.search_items(roll, self.magic_item_tables["swords"])
+
+                magic_item = result[0] + " (" + sword_type[0] + ")"
+                gp_value = result[1] + ", " + result[2] + " xp"
+
+            elif magic_item == "miscellaneous weapons":
+                roll = self.roll_percentile()
+                result = self.search_items(roll, self.magic_item_tables["miscellaneous weapons"])
+
+                roll = self.roll_percentile()
+                weapon_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
+
+                magic_item = weapon_bonus[0] + " " + result
+                gp_value = weapon_bonus[1] + ", " + weapon_bonus[2] + " xp"
+
+            elif magic_item == "special miscellaneous weapons":
+                roll = self.roll_percentile()
+                result = self.search_items(roll, self.magic_item_tables["special miscellaneous weapons"])
+
+                if "+" not in result: # Need to give it a weapon bonus
+                    roll = self.roll_percentile()
+                    weapon_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
+                    result[0] = weapon_bonus[0] + result[0]
+
+                if "weapon" in result: # Need to specify weapon type
+                    roll = self.roll_percentile()
+                    misc_weapon = self.search_items(roll, self.magic_item_tables["miscellaneous weapons"])
+                    result[0] = result[0] + " (" + misc_weapon + ")"                    
+
+                magic_item = result[0]
+                gp_value = result[1] + ", " + result[2] + " xp"
+
+            else:
+                magic_item = "not found"
+                gp_value = "error"
+        elif magic_item_tier == "armor & shields":
+            if magic_item == "shield":
+                roll = self.roll_percentile()
+                magic_item = self.search_items(roll, self.magic_item_tables["shield"])
+
+                if magic_item == "random shield type":
+                    roll = self.roll_percentile()
+                    shield_type = self.search_items(roll, self.magic_item_tables["random shield type"])
+                    
+                    # If we roll another random shield type, re-roll; additionally, a shield of bashing cannot be a pavis,
+                    # so re-roll if that occurs
+                    shield = ""
+                    while shield != "random shield type" and (shield != "pavis" or shield_type != "+1 shield of bashing"):
+                        roll = self.roll_percentile()
+                        shield = self.search_items(roll, self.magic_item_tables["shield"])
+
+                    magic_item = shield_type[0] + " (" + shield + ")"
+                    gp_value = shield_type[1] + ", " + shield_type[2] + " xp"
+                else:
+                    roll = self.roll_percentile()
+                    armor_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
+
+                    magic_item = armor_bonus[0] + magic_item
+                    gp_value = armor_bonus[1] + ", " + armor_bonus[2] + " xp"
+            elif magic_item == "armor":
+                roll = self.roll_percentile()
+                magic_item = self.search_items(roll, self.magic_item_tables["armor"])
+
+                if magic_item == "random armor type":
+                    roll = self.roll_percentile()
+                    armor_type = self.search_items(roll, self.magic_item_tables["random armor type"])
+
+                    if "resistance" in armor_type[0]:
+                        armor = "random armor type"
+                        while armor == "random armor type":
+                            roll = self.roll_percentile()
+                            armor = self.search_items(roll, self.magic_item_tables["armor"])
+                        
+                        armor_type[0] = armor + " of " + armor_type[0]
+                    
+                    magic_item = armor_type[0]
+                    gp_value = armor_type[1] + ", " + armor_type[2] + " xp"
+                else:
+                    roll = self.roll_percentile()
+                    armor_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
+
+                    magic_item = armor_bonus[0] + magic_item
+                    gp_value = armor_bonus[1] + ", " + armor_bonus[2] + " xp"
+            else:
+                magic_item = "not found"
+                gp_value = "error"
+
+        return magic_item + " (" + gp_value + ")"
