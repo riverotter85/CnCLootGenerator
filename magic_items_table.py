@@ -2,78 +2,78 @@ from loot_table import LootTable
 
 class MagicItemsTable(LootTable):
     potions = [
-        (1, 3, ("aid", "400 gp", "200")),
-        (4, 6, ("bless (oil)", "300 gp", "100")),
-        (7, 9, ("blur", "400 gp", "200")),
-        (10, 12, ("clairaudience/clairvoyance", "500 gp", "300")),
-        (13, 15, ("cure light wounds", "300 gp", "100")),
-        (16, 18, ("cure serious wounds", "500 gp", "300")),
-        (19, 21, ("cure critical wounds", "700 gp", "500")),
-        (22, 24, ("delay poison", "400 gp", "200")),
-        (25, 27, ("endure elements", "300 gp", "100")),
-        (28, 30, ("fly", "500 gp", "300")),
-        (31, 33, ("gaseous form", "500 gp", "300")),
-        (34, 36, [("giant strength (hill)", "700 gp", "500"),
-                  ("giant strength (stone)", "700 gp", "500"),
-                  ("giant strength (frost)", "700 gp", "500"),
-                  ("giant strength (fire)", "700 gp", "500"),
-                  ("giant strength (cloud)", "700 gp", "500"),
-                  ("giant strength (storm)", "700 gp", "500")]),
-        (37, 39, ("haste", "500 gp", "300")),
-        (40, 42, ("heal", "800 gp", "600")),
-        (43, 45, [("invisibility (potion)", "400 gp", "200"),
-                  ("invisibility (oil)", "400 gp", "200")]),
-        (46, 48, [("levitation (potion)", "400 gp", "200"),
-                  ("levitation (oil)", "400 gp", "200")]), # Expand
-        (49, 51, ("longevity", "12000 gp", "1500")),
-        (52, 54, ("neutralize poison", "600 gp", "400")),
-        (55, 57, ("nondetection", "500 gp", "300")),
-        (58, 60, ("pass without trace", "300 gp", "100")),
-        (61, 63, [("protection from alignment (good)", "300 gp", "100"),
-                  ("protection from alignment (evil)", "300 gp", "100"),
-                  ("protection from alignment (law)", "300 gp", "100"),
-                  ("protection from alignment (chaos)", "300 gp", "100")]), # Expand
-        (64, 66, ("protection from arrows", "500 gp", "300")),
-        (67, 69, ("remove blindness/deafness", "500 gp", "300")),
-        (70, 72, ("remove curse", "500 gp", "300")),
-        (73, 75, ("remove disease", "500 gp", "300")),
-        (76, 78, ("remove paralysis", "400 gp", "200")),
-        (79, 81, ("restoration", "700 gp", "400")),
-        (82, 84, ("sanctuary", "300 gp", "100")),
-        (85, 87, ("shield of faith +2", "300 gp", "100")),
-        (88, 90, ("spider climb", "300 gp", "100")),
-        (91, 93, ("tongues", "500 gp", "300")),
-        (94, 96, ("water breathing", "500 gp", "300")),
-        (97, 99, ("water walk", "900 gp", "700")),
-        (100, 100, ("trap the soul", "1,100 gp", "900"))
+        (1, 3, ("potion of aid", "400 gp", "200")),
+        (4, 6, ("oil of bless", "300 gp", "100")),
+        (7, 9, ("potion of blur", "400 gp", "200")),
+        (10, 12, ("potion of clairaudience/clairvoyance", "500 gp", "300")),
+        (13, 15, ("potion of cure light wounds", "300 gp", "100")),
+        (16, 18, ("potion of cure serious wounds", "500 gp", "300")),
+        (19, 21, ("potion of cure critical wounds", "700 gp", "500")),
+        (22, 24, ("potion of delay poison", "400 gp", "200")),
+        (25, 27, ("potion of endure elements", "300 gp", "100")),
+        (28, 30, ("potion of fly", "500 gp", "300")),
+        (31, 33, ("potion of gaseous form", "500 gp", "300")),
+        (34, 36, [("potion of giant strength (hill)", "700 gp", "500"),
+                  ("potion of giant strength (stone)", "700 gp", "500"),
+                  ("potion of giant strength (frost)", "700 gp", "500"),
+                  ("potion of giant strength (fire)", "700 gp", "500"),
+                  ("potion of giant strength (cloud)", "700 gp", "500"),
+                  ("potion of giant strength (storm)", "700 gp", "500")]),
+        (37, 39, ("potion of haste", "500 gp", "300")),
+        (40, 42, ("potion of heal", "800 gp", "600")),
+        (43, 45, [("potion of invisibility", "400 gp", "200"),
+                  ("oil of invisibility", "400 gp", "200")]),
+        (46, 48, [("potion of levitation", "400 gp", "200"),
+                  ("oil of levitation", "400 gp", "200")]), # Expand
+        (49, 51, ("potion of longevity", "12000 gp", "1500")),
+        (52, 54, ("potion of neutralize poison", "600 gp", "400")),
+        (55, 57, ("potion of nondetection", "500 gp", "300")),
+        (58, 60, ("potion of pass without trace", "300 gp", "100")),
+        (61, 63, [("potion of protection from alignment (good)", "300 gp", "100"),
+                  ("potion of protection from alignment (evil)", "300 gp", "100"),
+                  ("potion of protection from alignment (law)", "300 gp", "100"),
+                  ("potion of protection from alignment (chaos)", "300 gp", "100")]), # Expand
+        (64, 66, ("potion of protection from arrows", "500 gp", "300")),
+        (67, 69, ("potion of remove blindness/deafness", "500 gp", "300")),
+        (70, 72, ("potion of remove curse", "500 gp", "300")),
+        (73, 75, ("potion of remove disease", "500 gp", "300")),
+        (76, 78, ("potion of remove paralysis", "400 gp", "200")),
+        (79, 81, ("potion of restoration", "700 gp", "400")),
+        (82, 84, ("potion of sanctuary", "300 gp", "100")),
+        (85, 87, ("potion of shield of faith +2", "300 gp", "100")),
+        (88, 90, ("potion of spider climb", "300 gp", "100")),
+        (91, 93, ("potion of tongues", "500 gp", "300")),
+        (94, 96, ("potion of water breathing", "500 gp", "300")),
+        (97, 99, ("potion of water walk", "900 gp", "700")),
+        (100, 100, ("potion of trap the soul", "1,100 gp", "900"))
     ]
 
     scrolls = [
-        (1, 8, ("1 spell level", "300 gp", "100")),
-        (9, 16, ("2 spell levels", "400 gp", "200")),
-        (17,24, ("3 spell levels", "500 gp", "300")),
-        (25, 32, ("4 spell levels", "600 gp", "400")),
-        (33, 40, ("5 spell levels", "700 gp", "500")),
-        (41, 45, ("6 spell levels", "800 gp", "600")),
-        (46, 50, ("7 spell levels", "900 gp", "700")),
-        (51, 55, ("8 spell levels", "1000 gp", "800")),
-        (56, 60, ("9 spell levels", "1100 gp", "900")),
-        (61, 65, ("10 spell levels", "1200 gp", "1000")),
-        (66, 68, ("11 spell levels", "1300 gp", "1100")),
-        (69, 71, ("12 spell levels", "1400 gp", "1200")),
-        (72, 74, ("13 spell levels", "1500 gp", "1300")),
-        (75, 77, ("14 spell levels", "1600 gp", "1400")),
-        (78, 80, ("15 spell levels", "1700 gp", "1500")),
-        (81, 82, ("teleport without error", "900 gp", "700")),
-        (83, 84, ("symbol", "1000 gp", "800")),
-        (85, 86, ("trap the soul", "1100 gp", "900")),
-        (87, 88, ("time stop", "1100 gp", "900")),
-        (89, 90, ("true resurrection", "1100 gp", "900")),
-        (91, 92, ("mass heal", "1000 gp", "800")),
-        (93, 94, ("gate", "1100 gp", "900")),
-        (95, 96, ("create greater undead", "1000 gp", "800")),
-        (97, 98, ("shape change", "1100 gp", "900")),
-        (99, 100, ("clone", "1100 gp", "900"))
+        (1, 8, ("scroll of 1 spell level", "300 gp", "100")),
+        (9, 16, ("scroll of 2 spell levels", "400 gp", "200")),
+        (17,24, ("scroll of 3 spell levels", "500 gp", "300")),
+        (25, 32, ("scroll of 4 spell levels", "600 gp", "400")),
+        (33, 40, ("scroll of 5 spell levels", "700 gp", "500")),
+        (41, 45, ("scroll of 6 spell levels", "800 gp", "600")),
+        (46, 50, ("scroll of 7 spell levels", "900 gp", "700")),
+        (51, 55, ("scroll of 8 spell levels", "1000 gp", "800")),
+        (56, 60, ("scroll of 9 spell levels", "1100 gp", "900")),
+        (61, 65, ("scroll of 10 spell levels", "1200 gp", "1000")),
+        (66, 68, ("scroll of 11 spell levels", "1300 gp", "1100")),
+        (69, 71, ("scroll of 12 spell levels", "1400 gp", "1200")),
+        (72, 74, ("scroll of 13 spell levels", "1500 gp", "1300")),
+        (75, 77, ("scroll of 14 spell levels", "1600 gp", "1400")),
+        (78, 80, ("scroll of 15 spell levels", "1700 gp", "1500")),
+        (81, 82, ("scroll of teleport without error", "900 gp", "700")),
+        (83, 84, ("scroll of symbol", "1000 gp", "800")),
+        (85, 86, ("scroll of trap the soul", "1100 gp", "900")),
+        (87, 88, ("scroll of time stop", "1100 gp", "900")),
+        (89, 90, ("scroll of true resurrection", "1100 gp", "900")),
+        (91, 92, ("scroll of mass heal", "1000 gp", "800")),
+        (93, 94, ("scroll of gate", "1100 gp", "900")),
+        (95, 96, ("scroll of create greater undead", "1000 gp", "800")),
+        (97, 98, ("scroll of shape change", "1100 gp", "900")),
+        (99, 100, ("scroll of clone", "1100 gp", "900"))
     ]
 
     weapons = [
@@ -138,12 +138,12 @@ class MagicItemsTable(LootTable):
     ]
 
     miscellaneous_weapons = [
-        (1, 2, "10 arrows"),
+        (1, 2, "arrows (10)"),
         (3, 8, "battle axe"),
         (9, 12, "hand/throwing axe"),
         (13, 16, "two-handed axe"),
         (17, 20, "bardiche"),
-        (21, 24, "10 bolts"),
+        (21, 24, "bolts (10)"),
         (25, 28, "bow"),
         (29, 32, "club"),
         (33, 36, "crossbow"),
@@ -224,16 +224,16 @@ class MagicItemsTable(LootTable):
 
     random_armor_type = [
         (1, 9, ("+3 armor of kavacha", "9000 gp", "1200")),
-        (10, 18, [("+2 armor of cold resistance", "4000 gp", "750"),
-                  ("+2 armor of fire resistance", "4000 gp", "750")]),
+        (10, 18, [("armor of cold resistance (+2)", "4000 gp", "750"),
+                  ("armor of fire resistance (+2)", "4000 gp", "750")]),
         (19, 36, ("+4 dwarven plate", "16000 gp", "1750")),
         (37, 54, ("+5 elven chain", "25000 gp", "2500")),
         (55, 64, ("+3 armor of etherealness", "9000 gp", "1200")),
         (65, 82, ("+1 plate armor of the deep", "1000 gp", "250")),
-        (83, 100, [("+1 armor of spell resistance", "10000 gp", "1000"),
-                   ("+2 armor of spell resistance", "20000 gp", "2000"),
-                   ("+5 armor of spell resistance", "50000 gp", "5000"),
-                   ("+8 armor of spell resistance", "80000 gp", "8000")])
+        (83, 100, [("armor of spell resistance (+1)", "10000 gp", "1000"),
+                   ("armor of spell resistance (+2)", "20000 gp", "2000"),
+                   ("armor of spell resistance (+5)", "50000 gp", "5000"),
+                   ("armor of spell resistance (+8)", "80000 gp", "8000")])
     ]
 
     miscellaneous_magic = [
@@ -684,15 +684,31 @@ class MagicItemsTable(LootTable):
         self.magic_item_tables["miscellaneous d"] = MagicItemsTable.miscellaneous_d
         self.magic_item_tables["miscellaneous e"] = MagicItemsTable.miscellaneous_e
 
+    @staticmethod
+    def format_table_results(item, value, experience):
+        return item + " (" + value + ", " + experience + " xp)"
+
+    def get_potion(self, i):
+        result = self.search_items(i, self.magic_item_tables["potions"])
+        return self.format_table_results(result[0], result[1], result[2])
+
+    def get_scroll(self, i):
+        result = self.search_items(i, self.magic_item_tables["scrolls"])
+        return self.format_table_results(result[0], result[1], result[2])
+
     def roll(self):
+        # Initialize return variables to their default values
+        magic_item = "not found"
+        gp_value = "error"
+
         roll = self.roll_percentile()
         magic_item_tier = self.search_items(roll, self.table)
 
         roll = self.roll_percentile()
-        magic_item = self.search_items(roll, self.magic_item_tables[magic_item_tier])
+        result = self.search_items(roll, self.magic_item_tables[magic_item_tier])
 
         if magic_item_tier == "weapons":
-            if magic_item == "swords":
+            if result == "swords":
                 roll = self.roll_percentile()
                 result = self.search_items(roll, self.magic_item_tables["swords"])
 
@@ -702,17 +718,17 @@ class MagicItemsTable(LootTable):
                 magic_item = weapon_bonus[0] + " " + result
                 gp_value = weapon_bonus[1] + ", " + weapon_bonus[2] + " xp"
 
-            elif magic_item == "special swords":
+            elif result == "special swords":
                 roll = self.roll_percentile()
                 result = self.search_items(roll, self.magic_item_tables["special swords"])
 
                 roll = self.roll_percentile()
                 sword_type = self.search_items(roll, self.magic_item_tables["swords"])
 
-                magic_item = result[0] + " (" + sword_type[0] + ")"
+                magic_item = result[0] + " (" + sword_type + ")"
                 gp_value = result[1] + ", " + result[2] + " xp"
 
-            elif magic_item == "miscellaneous weapons":
+            elif result == "miscellaneous weapons":
                 roll = self.roll_percentile()
                 result = self.search_items(roll, self.magic_item_tables["miscellaneous weapons"])
 
@@ -722,28 +738,25 @@ class MagicItemsTable(LootTable):
                 magic_item = weapon_bonus[0] + " " + result
                 gp_value = weapon_bonus[1] + ", " + weapon_bonus[2] + " xp"
 
-            elif magic_item == "special miscellaneous weapons":
+            elif result == "special miscellaneous weapons":
                 roll = self.roll_percentile()
                 result = self.search_items(roll, self.magic_item_tables["special miscellaneous weapons"])
+                magic_item = result[0]
 
-                if "+" not in result: # Need to give it a weapon bonus
+                if "+" not in result[0]: # Need to give it a weapon bonus
                     roll = self.roll_percentile()
                     weapon_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
-                    result[0] = weapon_bonus[0] + result[0]
+                    magic_item = weapon_bonus[0] + " " + magic_item
 
-                if "weapon" in result: # Need to specify weapon type
+                if "weapon" in result[0]: # Need to specify weapon type
                     roll = self.roll_percentile()
                     misc_weapon = self.search_items(roll, self.magic_item_tables["miscellaneous weapons"])
-                    result[0] = result[0] + " (" + misc_weapon + ")"                    
+                    magic_item = magic_item + " (" + misc_weapon + ")"                    
 
-                magic_item = result[0]
                 gp_value = result[1] + ", " + result[2] + " xp"
 
-            else:
-                magic_item = "not found"
-                gp_value = "error"
         elif magic_item_tier == "armor & shields":
-            if magic_item == "shield":
+            if result == "shield":
                 roll = self.roll_percentile()
                 magic_item = self.search_items(roll, self.magic_item_tables["shield"])
 
@@ -753,8 +766,8 @@ class MagicItemsTable(LootTable):
                     
                     # If we roll another random shield type, re-roll; additionally, a shield of bashing cannot be a pavis,
                     # so re-roll if that occurs
-                    shield = ""
-                    while shield != "random shield type" and (shield != "pavis" or shield_type != "+1 shield of bashing"):
+                    shield = "random shield type"
+                    while shield == "random shield type" or (shield == "pavis" and "bashing" in shield_type[0]):
                         roll = self.roll_percentile()
                         shield = self.search_items(roll, self.magic_item_tables["shield"])
 
@@ -764,15 +777,16 @@ class MagicItemsTable(LootTable):
                     roll = self.roll_percentile()
                     armor_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
 
-                    magic_item = armor_bonus[0] + magic_item
+                    magic_item = armor_bonus[0] + " " + magic_item + " shield"
                     gp_value = armor_bonus[1] + ", " + armor_bonus[2] + " xp"
-            elif magic_item == "armor":
+            elif result == "armor":
                 roll = self.roll_percentile()
                 magic_item = self.search_items(roll, self.magic_item_tables["armor"])
 
                 if magic_item == "random armor type":
                     roll = self.roll_percentile()
                     armor_type = self.search_items(roll, self.magic_item_tables["random armor type"])
+                    magic_item = armor_type[0]
 
                     if "resistance" in armor_type[0]:
                         armor = "random armor type"
@@ -780,18 +794,31 @@ class MagicItemsTable(LootTable):
                             roll = self.roll_percentile()
                             armor = self.search_items(roll, self.magic_item_tables["armor"])
                         
-                        armor_type[0] = armor + " of " + armor_type[0]
+                        magic_item = armor + " " + magic_item
                     
-                    magic_item = armor_type[0]
                     gp_value = armor_type[1] + ", " + armor_type[2] + " xp"
                 else:
                     roll = self.roll_percentile()
                     armor_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
 
-                    magic_item = armor_bonus[0] + magic_item
+                    magic_item = armor_bonus[0] + " " + magic_item + " armor"
                     gp_value = armor_bonus[1] + ", " + armor_bonus[2] + " xp"
-            else:
-                magic_item = "not found"
-                gp_value = "error"
 
+        elif magic_item_tier == "cursed items":
+            magic_item = result
+            gp_value = "0 gp, 0 xp"
+        elif magic_item_tier == "artifacts":
+            magic_item = result
+            gp_value = "priceless, 20000 xp"
+        else:
+            if magic_item_tier == "miscellaneous magic":
+                roll = self.roll_percentile()
+                result = self.search_items(roll, self.magic_item_tables[result])
+
+            magic_item = result[0]
+            gp_value = result[1] + ", " + result[2] + " xp"
+
+        print("Magic Item Tier: " + magic_item_tier)
+        print(result)
+        print(magic_item)
         return magic_item + " (" + gp_value + ")"
