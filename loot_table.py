@@ -6,8 +6,13 @@ class LootTable:
 
     @staticmethod
     def roll_dice(str_value):
-        multiple_vals = str_value.split("x")
+        addition_vals = str_value.split("+")
+        multiple_vals = addition_vals[0].split("x")
         vals = multiple_vals[0].split("d")
+
+        if len(vals) == 1:
+            return vals[0]
+
         d_num = int(vals[0])
         d_range = int(vals[1])
 
@@ -17,6 +22,9 @@ class LootTable:
 
         if len(multiple_vals) > 1:
             sum *= int(multiple_vals[1])
+        
+        if len(addition_vals) > 1:
+            sum += int(addition_vals[1])
 
         return str(sum)
 

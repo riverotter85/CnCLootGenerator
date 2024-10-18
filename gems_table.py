@@ -17,8 +17,10 @@ class GemsTable(LootTable):
             (99, 100, (["diamond", "blood red ruby", "blue sapphire"], "5000 gp"))
     ]
 
-    def roll(self):
-        gems_tier_roll = self.roll_percentile()
+    def roll(self, modifier):
+        gems_tier_roll = self.roll_percentile() + modifier
+        if gems_tier_roll < 1:
+            gems_tier_roll = 1
         gems_tier = self.search_items(gems_tier_roll, self.table)
         gem = random.choice(gems_tier[0])
 

@@ -803,62 +803,85 @@ class MagicItemsTable(LootTable):
 
         return self.format_table_results(result, "priceless", "20000")
 
-    def roll(self):
+    def roll(self, max_experience):
         # Initialize return variables to their default values
         magic_item = "not found"
 
         magic_item_tier = self.search_items(self.roll_percentile(), self.table)
 
+        # Potions
         if magic_item_tier == "potions":
             magic_item = self.get_potion(self.roll_percentile())
 
+        # Scrolls
         elif magic_item_tier == "scrolls":
             magic_item = self.get_scroll(self.roll_percentile())
 
+        # Weapons
         elif magic_item_tier == "weapons":
             result = self.get_weapons_category(self.roll_percentile())
+
+            # Standard magic swords
             if result == "swords":
                 magic_item = self.get_sword(self.roll_percentile(), self.roll_percentile())
 
+            # Special magic swords
             elif result == "special swords":
                 magic_item = self.get_special_sword(self.roll_percentile(), self.roll_percentile())
 
+            # Standard misc weapons
             elif result == "miscellaneous weapons":
                 magic_item = self.get_miscellaneous_weapon(self.roll_percentile(), self.roll_percentile())
 
+            # Special misc weapons
             elif result == "special miscellaneous weapons":
                 magic_item = self.get_special_miscellaneous_weapon(self.roll_percentile(), self.roll_percentile(), self.roll_percentile())
 
+        # Armor and shields
         elif magic_item_tier == "armor & shields":
             result = self.get_armor_and_shields_category(self.roll_percentile())
+
+            # Shields
             if result == "shield":
                 magic_item = self.search_items(self.roll_percentile(), self.magic_item_tables["shield"])
 
+                # Random shield types
                 if magic_item == "random shield type":
                     magic_item = self.get_random_shield_type(self.roll_percentile())
+                
+                # Standard shield types
                 else:
                     magic_item = self.get_shield(self.roll_percentile(), self.roll_percentile())
 
+            # Armor
             elif result == "armor":
                 magic_item = self.search_items(self.roll_percentile(), self.magic_item_tables["armor"])
 
+                # Random armor types
                 if magic_item == "random armor type":
                     self.get_random_armor_type(self.roll_percentile())
+
+                # Standard armor types
                 else:
                     self.get_armor(self.roll_percentile(), self.roll_percentile())
 
+        # Misc magic items
         elif magic_item_tier == "miscellaneous magic":
             magic_item = self.get_miscellaneous_magic(self.roll_percentile(), self.roll_percentile())
 
+        # Rings
         elif magic_item_tier == "rings":
             magic_item = self.get_ring(self.roll_percentile())
 
+        # Rods, staves, and wands
         elif magic_item_tier == "rods, staves, wands":
             magic_item = self.get_rod_stave_wand(self.roll_percentile())
 
+        # Cursed items
         elif magic_item_tier == "cursed items":
             magic_item = self.get_cursed_item(self.roll_percentile())
 
+        # Artifacts
         elif magic_item_tier == "artifacts":
             magic_item = self.get_artifact(self.roll_percentile())
 

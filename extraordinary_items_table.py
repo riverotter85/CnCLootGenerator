@@ -2,9 +2,9 @@ from loot_table import LootTable
 
 class ExtraordinaryItemsTable(LootTable):
     expert_weapons = [
-        (1, 5, [("20 arrows", "20 gp"),
-                ("12 arrows", "2 gp"),
-                ("2 silver arrows", "20 gp")]),
+        (1, 5, [("arrows (20)", "20 gp"),
+                ("arrows (12)", "2 gp"),
+                ("silver arrows (2)", "20 gp")]),
         (6, 10, ("battle axe", "100 gp")),
         (11, 15, ("12 bolts", "10 gp")),
         (16, 20, [("long bow", "750 gp"),
@@ -46,6 +46,12 @@ class ExtraordinaryItemsTable(LootTable):
                   ("two-handed sword", "300 gp")]),
         (91, 95, ("trident", "100 gp")),
         (96, 100, ("two-Handed axe", "300 gp"))
+    ]
+
+    expert_weapon_types = [
+        (1, 50, ("expert", "+1 to hit", 1.0)),
+        (51, 98, ("expert", "+1 damage", 1.0)),
+        (99, 100, ("greater expert", "+1 to hit/damage", 2.5))
     ]
 
     jewelry = [
@@ -184,6 +190,7 @@ class ExtraordinaryItemsTable(LootTable):
 
         self.extraordinary_item_tables = {}
         self.extraordinary_item_tables["expert weapons"] = ExtraordinaryItemsTable.expert_weapons
+        self.extraordinary_item_tables["expert weapon types"] = ExtraordinaryItemsTable.expert_weapon_types
         self.extraordinary_item_tables["jewelry"] = ExtraordinaryItemsTable.jewelry
         self.extraordinary_item_tables["worn & ceremonial items"] = ExtraordinaryItemsTable.worn_and_ceremonial_items
         self.extraordinary_item_tables["hand crafted items"] = ExtraordinaryItemsTable.hand_crafted_items
@@ -191,6 +198,7 @@ class ExtraordinaryItemsTable(LootTable):
         self.extraordinary_item_tables["values"] = ExtraordinaryItemsTable.values
 
     def roll(self):
+        gp_multiplier = 1.0
         roll = self.roll_percentile()
         extraordinary_item_tier = self.search_items(roll, self.table)
 
@@ -198,6 +206,13 @@ class ExtraordinaryItemsTable(LootTable):
         extraordinary_item = self.search_items(roll, self.extraordinary_item_tables[extraordinary_item_tier])
 
         item = extraordinary_item[0]
+        if extraordinary_item_tier == "expert weapons":
+            # Roll for the type of expert weapon
+            roll = self.roll_percentile()
+            expert_weapon_type = self.search_items(roll, self.extraordinary_item_tables["expert weapon types"])
+            item = expert_weapon_type[0] + " " + item + " (" + expert_weapon_type[1] + ")"
+            gp_multiplier = expert_weapon_type[2]
+
         gp_value = extraordinary_item[1]
         if gp_value == "":
             roll = self.roll_percentile()
@@ -207,5 +222,6 @@ class ExtraordinaryItemsTable(LootTable):
         elif "d" in gp_value:
             gp_value = self.roll_dice(gp_value) + " gp"
             
+        gp_value = str(int(float(gp_value.split(" ")[0]) * gp_multiplier)) + " gp" # Multiplying the gp value; go back to this and make it more readable
 
         return item + " (" + gp_value + ")"

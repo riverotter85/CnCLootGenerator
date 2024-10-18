@@ -1,26 +1,9 @@
+from treasure_table import TreasureTable
 from gems_table import GemsTable
 from extraordinary_items_table import ExtraordinaryItemsTable
 from magic_items_table import MagicItemsTable
 
-class LootGenerator:
-    def __init__(self):
-        self.tables = {}
-        self.tables["Gems"] = GemsTable()
-        self.tables["Extraordinary Items"] = ExtraordinaryItemsTable()
-        self.tables["Magic Items"] = MagicItemsTable()
-
-    # def add_table(self, table_name, items):
-    #     self.tables[table_name] = LootTable(table_name, items)
-
-    def generate_loot(self, table_name):
-        if table_name in self.tables:
-            item = self.tables[table_name].roll()
-            return item
-        else:
-            return "Table not found."
-
-# Define your loot tables
-loot_generator = LootGenerator()
+treasure_table = TreasureTable()
 
 # Example Loot Tables
 # loot_generator.add_table("Gems", GemTable())
@@ -58,24 +41,32 @@ def main():
 
     while(True):
         print("==========================================")
-        print("1) Gems")
-        print("2) Extraordinary Items")
-        print("3) Magic Items")
-        print("4) Exit")
+        print("1) Treasure")
+        print("2) Gems")
+        print("3) Extraordinary Items")
+        print("4) Magic Items")
+        print("5) Exit")
         print("==========================================")
         print(item_banner)
-        option = input("Select one of the above options (1-4): ")
+        option = input("Select one of the above options (1-5): ")
         
         if option == "1":
-            loot = loot_generator.generate_loot("Gems")
-            item_banner = "\nYou found: " + loot + "\n"
+            treasure_type = "0"
+            while int(treasure_type) < 1 or int(treasure_type) > 18:
+                treasure_type = input("Select treasure type (1-18): ")
+
+            loot = treasure_table.roll_treasure(treasure_type)
+            item_banner = "\nYou found: \n" + loot + "\n"
         elif option == "2":
-            loot = loot_generator.generate_loot("Extraordinary Items")
+            loot = treasure_table.roll_gem()
             item_banner = "\nYou found: " + loot + "\n"
         elif option == "3":
-            loot = loot_generator.generate_loot("Magic Items")
+            loot = treasure_table.roll_extraordinary_item()
             item_banner = "\nYou found: " + loot + "\n"
         elif option == "4":
+            loot = treasure_table.roll_magic_item()
+            item_banner = "\nYou found: " + loot + "\n"
+        elif option == "5":
             print(f"Goodbye!")
             break
         else:
