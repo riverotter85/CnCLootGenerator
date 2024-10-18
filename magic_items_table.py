@@ -1,3 +1,4 @@
+import random
 from loot_table import LootTable
 
 class MagicItemsTable(LootTable):
@@ -392,7 +393,7 @@ class MagicItemsTable(LootTable):
 
     miscellaneous_d = [
         (1, 4, ("iron bands of binding", "17500 gp", "1750")),
-        (5, 7, ("iron flask", "0", "0")), # Flask itself has no intrinsic value
+        (5, 7, ("iron flask", "none", "none")), # Flask itself has no intrinsic value
         (8, 9, ("lady of the lake's gift", "15000 gp", "7500")),
         (10, 11, ("lyre of building", "13500 gp", "2000")),
         (12, 13, ("mantle of barb-e-bayan", "6000 gp", "2500")),
@@ -688,57 +689,185 @@ class MagicItemsTable(LootTable):
     def format_table_results(item, value, experience):
         return item + " (" + value + ", " + experience + " xp)"
 
-    def get_potion(self, index):
-        result = self.search_items(index, self.magic_item_tables["potions"])
+    @staticmethod
+    def choose_from_limited_items(items):
+        if len(items) == 0:
+            return None
+
+        item = random.choice(items)
+        if isinstance(item, list):
+            item = random.choice(item) # We've hit a sub-list, so pick one of the items at random
+
+        return item
+
+    @staticmethod
+    def create_limited_items(items, max_experience):
+        new_items = []
+        print("In list")
+
+        # Pick out magic items that are within xp limitations; we are adding duplicate
+        # entries to retain the appropriate probabilities
+        for start, end, item in items:
+            num_instances = end - start + 1
+
+            try:
+                if isinstance(item, list):
+                    new_sub_items = []
+
+                    # Create sub-list with allowed items
+                    for sub_item in item:
+                        if int(sub_item[2]) <= max_experience:
+                            new_sub_items.append(sub_item)
+
+                    # Now add sub-list to main list if it has anything in it
+                    if len(new_sub_items) > 0:
+                        for i in range(num_instances):
+                            new_items.append(new_sub_items)
+                else:
+                    print(item[2])
+                    if int(item[2]) <= max_experience:
+                        for i in range(num_instances):
+                            new_items.append(item)
+
+            except ValueError:
+                pass
+
+        return new_items
+
+    def get_potion(self, max_experience):
+        result = ("", "", "")
+
+        if max_experience > 0:
+            limited_potions = self.create_limited_items(self.magic_item_tables["potions"], max_experience)
+            result = self.choose_from_limited_items(limited_potions)
+        else:
+            roll = self.roll_percentile()
+            result = self.search_items(roll, self.magic_item_tables["potions"])
+        
+        if result is None:
+            return None
+
         return self.format_table_results(result[0], result[1], result[2])
 
-    def get_scroll(self, index):
-        result = self.search_items(index, self.magic_item_tables["scrolls"])
+    def get_scroll(self, max_experience):
+        result = ("", "", "")
+
+        if max_experience > 0:
+            limited_scrolls = self.create_limited_items(self.magic_item_tables["scrolls"], max_experience)
+            result = self.choose_from_limited_items(limited_scrolls)
+        else:
+            roll = self.roll_percentile()
+            result = self.search_items(roll, self.magic_item_tables["scrolls"])
+        
+        if result is None:
+            return None
+
         return self.format_table_results(result[0], result[1], result[2])
 
-    def get_weapons_category(self, category_index):
-        return self.search_items(category_index, self.magic_item_tables["weapons"])
+    def get_weapons_category(self):
+        roll = self.roll_percentile()
+        return self.search_items(roll, self.magic_item_tables["weapons"])
 
-    def get_sword(self, sword_index, weapon_bonus_index):
-        weapon = self.search_items(sword_index, self.magic_item_tables["swords"])
-        weapon_bonus = self.search_items(weapon_bonus_index, self.magic_item_tables["weapon/armor bonus"])
+    def get_sword(self, max_experience):
+        roll = self.roll_percentile()
+        weapon = self.search_items(roll, self.magic_item_tables["swords"])
+
+        weapon_bonus = ("", "", "")
+        if max_experience > 0:
+            limited_bonuses = self.create_limited_items(self.magic_item_tables["weapon/armor bonus"], max_experience)
+            weapon_bonus = self.choose_from_limited_items(limited_bonuses)
+        else:
+            roll = self.roll_percentile()
+            weapon_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
+        
+        if weapon_bonus is None:
+            return None
+
         result = weapon_bonus[0] + " " + weapon
 
         return self.format_table_results(result, weapon_bonus[1], weapon_bonus[2])
 
-    def get_special_sword(self, special_sword_index, sword_index):
-        weapon = self.search_items(special_sword_index, self.magic_item_tables["special swords"])
-        sword_type = self.search_items(sword_index, self.magic_item_tables["swords"])
+    def get_special_sword(self, max_experience):
+        weapon = ("", "", "")
+
+        if max_experience > 0:
+            limited_swords = self.create_limited_items(self.magic_item_tables["special swords"], max_experience)
+            weapon = self.choose_from_limited_items(limited_swords)
+        else:
+            roll = self.roll_percentile()
+            weapon = self.search_items(roll, self.magic_item_tables["special swords"])
+        
+        if weapon is None:
+            return None
+
+        roll = self.roll_percentile()
+        sword_type = self.search_items(roll, self.magic_item_tables["swords"])
         result = weapon[0] + " (" + sword_type + ")"
 
         return self.format_table_results(result, weapon[1], weapon[2])
 
-    def get_miscellaneous_weapon(self, miscellaneous_weapon_index, weapon_bonus_index):
-        weapon = self.search_items(miscellaneous_weapon_index, self.magic_item_tables["miscellaneous weapons"])
-        weapon_bonus = self.search_items(weapon_bonus_index, self.magic_item_tables["weapon/armor bonus"])
+    def get_miscellaneous_weapon(self, max_experience):
+        roll = self.roll_percentile()
+        weapon = self.search_items(roll, self.magic_item_tables["miscellaneous weapons"])
+
+        weapon_bonus = ("", "", "")
+        if max_experience > 0:
+            limited_bonuses = self.create_limited_items(self.magic_item_tables["weapon/armor bonus"], max_experience)
+            weapon_bonus = self.choose_from_limited_items(limited_bonuses)
+        else:
+            roll = self.roll_percentile()
+            weapon_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
+        
+        if weapon_bonus is None:
+            return None
+
         result = weapon_bonus[0] + " " + weapon
 
         return self.format_table_results(result, weapon_bonus[1], weapon_bonus[2])
 
-    def get_special_miscellaneous_weapon(self, special_miscellaneous_weapon_index, weapon_bonus_index, miscellaneous_weapon_index):
-        weapon = self.search_items(special_miscellaneous_weapon_index, self.magic_item_tables["special miscellaneous weapons"])
+    def get_special_miscellaneous_weapon(self, max_experience):
+        weapon = ("", "", "")
+
+        if max_experience > 0:
+            limited_weapons = self.create_limited_items(self.magic_item_tables["special miscellaneous weapons"], max_experience)
+            weapon = self.choose_from_limited_items(limited_weapons)
+        else:
+            roll = self.roll_percentile()
+            weapon = self.search_items(roll, self.magic_item_tables["special miscellaneous weapons"])
+        
+        if weapon is None:
+            return None
+
         result = weapon[0]
 
         if "+" not in weapon[0]: # Need to give it a weapon bonus
-            weapon_bonus = self.search_items(weapon_bonus_index, self.magic_item_tables["weapon/armor bonus"])
+            roll = self.roll_percentile()
+            weapon_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
             result = weapon_bonus[0] + " " + result 
 
         if "weapon" in weapon[0]: # Need to specify weapon type
-            misc_weapon = self.search_items(miscellaneous_weapon_index, self.magic_item_tables["miscellaneous weapons"])
+            roll = self.roll_percentile()
+            misc_weapon = self.search_items(roll, self.magic_item_tables["miscellaneous weapons"])
             result = result + " (" + misc_weapon + ")"                    
 
         return self.format_table_results(result, weapon[1], weapon[2])
 
-    def get_armor_and_shields_category(self, armor_and_shields_index):
-        return self.search_items(armor_and_shields_index, self.magic_item_tables["armor & shields"])
+    def get_armor_and_shields_category(self):
+        roll = self.roll_percentile()
+        return self.search_items(roll, self.magic_item_tables["armor & shields"])
 
-    def get_random_shield_type(self, random_shield_type_index):
-        shield_type = self.search_items(random_shield_type_index, self.magic_item_tables["random shield type"])
+    def get_random_shield_type(self, max_experience):
+        shield_type = ("", "", "")
+
+        if max_experience > 0:
+            limited_shields = self.create_limited_items(self.magic_item_tables["random shield type"], max_experience)
+            shield_type = self.choose_from_limited_items(limited_shields)
+        else:
+            roll = self.roll_percentile()
+            shield_type = self.search_items(roll, self.magic_item_tables["random shield type"])
+        
+        if shield_type is None:
+            return None
         
         # If we roll random shield type once again, re-roll; additionally, a shield of bashing cannot be a pavis,
         # so re-roll if that occurs
@@ -750,15 +879,38 @@ class MagicItemsTable(LootTable):
 
         return self.format_table_results(result, shield_type[1], shield_type[2])
 
-    def get_shield(self, shield_index, armor_bonus_index):
-        shield = self.search_items(shield_index, self.magic_item_tables["shield"])
-        armor_bonus = self.search_items(armor_bonus_index, self.magic_item_tables["weapon/armor bonus"])
+    def get_shield(self, max_experience):
+        roll = self.roll_percentile()
+        shield = self.search_items(roll, self.magic_item_tables["shield"])
+
+        armor_bonus = ("", "", "")
+        if max_experience > 0:
+            limited_bonuses = self.create_limited_items(self.magic_item_tables["weapon/armor bonus"], max_experience)
+            armor_bonus = self.choose_from_limited_items(limited_bonuses)
+        else:
+            roll = self.roll_percentile()
+            armor_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
+        
+        if armor_bonus is None:
+            return None
+
         result = armor_bonus[0] + " " + shield + " shield"
 
         return self.format_table_results(result, armor_bonus[1], armor_bonus[2])
 
-    def get_random_armor_type(self, random_armor_type_index):
-        armor_type = self.search_items(random_armor_type_index, self.magic_item_tables["random armor type"])
+    def get_random_armor_type(self, max_experience):
+        armor_type = ("", "", "")
+
+        if max_experience > 0:
+            limited_armor = self.create_limited_items(self.magic_item_tables["random armor type"], max_experience)
+            armor_type = self.choose_from_limited_items(limited_armor)
+        else:
+            roll = self.roll_percentile()
+            armor_type = self.search_items(roll, self.magic_item_tables["random armor type"])
+        
+        if armor_type is None:
+            return None
+
         result = armor_type[0]
 
         if "resistance" in armor_type[0]:
@@ -770,119 +922,172 @@ class MagicItemsTable(LootTable):
         
         return self.format_table_results(result, armor_type[1], armor_type[2])
 
-    def get_armor(self, armor_index, armor_bonus_index):
-        armor = self.search_items(armor_index, self.magic_item_tables["armor"])
-        armor_bonus = self.search_items(armor_bonus_index, self.magic_item_tables["weapon/armor bonus"])
+    def get_armor(self, max_experience):
+        roll = self.roll_percentile()
+        armor = self.search_items(roll, self.magic_item_tables["armor"])
+
+        armor_bonus = ("", "", "")
+        if max_experience > 0:
+            limited_bonuses = self.create_limited_items(self.magic_item_tables["weapon/armor bonus"], max_experience)
+            armor_bonus = self.choose_from_limited_items(limited_bonuses)
+        else:
+            roll = self.roll_percentile()
+            armor_bonus = self.search_items(roll, self.magic_item_tables["weapon/armor bonus"])
+        
+        if armor_bonus is None:
+            return None
+
         result = armor_bonus[0] + " " + armor + " armor"
 
         return self.format_table_results(result, armor_bonus[1], armor_bonus[2])
 
-    def get_miscellaneous_magic(self, category_index, magic_index):
-        category = self.search_items(category_index, self.magic_item_tables["miscellaneous magic"])
-        result = self.search_items(magic_index, self.magic_item_tables[category])
+    def get_miscellaneous_magic(self, max_experience):
+        roll = self.roll_percentile()
+        category = self.search_items(roll, self.magic_item_tables["miscellaneous magic"])
+
+        result = ("", "", "")
+        if max_experience > 0:
+            limited_magic = self.create_limited_items(self.magic_item_tables[category], max_experience)
+            result = self.choose_from_limited_items(limited_magic)
+        else:
+            roll = self.roll_percentile()
+            result = self.search_items(roll, self.magic_item_tables[category])
+        
+        if result is None:
+            return None
 
         return self.format_table_results(result[0], result[1], result[2])
 
-    def get_ring(self, ring_index):
-        result = self.search_items(ring_index, self.magic_item_tables["rings"])
+    def get_ring(self, max_experience):
+        result = ("", "", "")
+
+        if max_experience > 0:
+            limited_rings = self.create_limited_items(self.magic_item_tables["rings"], max_experience)
+            result = self.choose_from_limited_items(limited_rings)
+        else:
+            roll = self.roll_percentile()
+            result = self.search_items(roll, self.magic_item_tables["rings"])
+        
+        if result is None:
+            return None
 
         return self.format_table_results(result[0], result[1], result[2])
 
-    def get_rod_stave_wand(self, rod_stave_wand_index):
-        result = self.search_items(rod_stave_wand_index, self.magic_item_tables["rods, staves, wands"])
+    def get_rod_stave_wand(self, max_experience):
+        result = ("", "", "")
+
+        if max_experience > 0:
+            limited_rods_staves_wands = self.create_limited_items(self.magic_item_tables["rods, staves, wands"], max_experience)
+            result = self.choose_from_limited_items(limited_rods_staves_wands)
+        else:
+            roll = self.roll_percentile()
+            result = self.search_items(roll, self.magic_item_tables["rods, staves, wands"])
+        
+        if result is None:
+            return None
 
         return self.format_table_results(result[0], result[1], result[2])
 
-    def get_cursed_item(self, cursed_item_index):
-        result = self.search_items(cursed_item_index, self.magic_item_tables["cursed items"])
+    def get_cursed_item(self):
+        roll = self.roll_percentile()
+        result = self.search_items(roll, self.magic_item_tables["cursed items"])
 
         return self.format_table_results(result, "0 gp", "0")
 
-    def get_artifact(self, artifact_index):
-        result = self.search_items(artifact_index, self.magic_item_tables["artifacts"])
+    def get_artifact(self, max_experience):
+        if max_experience < 20000:
+            return None
+
+        roll = self.roll_percentile()
+        result = self.search_items(roll, self.magic_item_tables["artifacts"])
 
         return self.format_table_results(result, "priceless", "20000")
 
     def roll(self, max_experience):
         # Initialize return variables to their default values
-        magic_item = "not found"
+        magic_item = None
 
-        magic_item_tier = self.search_items(self.roll_percentile(), self.table)
+        while magic_item == None:
+            roll = self.roll_percentile()
+            magic_item_tier = self.search_items(roll, self.table)
+            print(magic_item_tier)
 
-        # Potions
-        if magic_item_tier == "potions":
-            magic_item = self.get_potion(self.roll_percentile())
+            # Potions
+            if magic_item_tier == "potions":
+                magic_item = self.get_potion(max_experience)
 
-        # Scrolls
-        elif magic_item_tier == "scrolls":
-            magic_item = self.get_scroll(self.roll_percentile())
+            # Scrolls
+            elif magic_item_tier == "scrolls":
+                magic_item = self.get_scroll(max_experience)
 
-        # Weapons
-        elif magic_item_tier == "weapons":
-            result = self.get_weapons_category(self.roll_percentile())
+            # Weapons
+            elif magic_item_tier == "weapons":
+                result = self.get_weapons_category()
 
-            # Standard magic swords
-            if result == "swords":
-                magic_item = self.get_sword(self.roll_percentile(), self.roll_percentile())
+                # Standard magic swords
+                if result == "swords":
+                    magic_item = self.get_sword(max_experience)
 
-            # Special magic swords
-            elif result == "special swords":
-                magic_item = self.get_special_sword(self.roll_percentile(), self.roll_percentile())
+                # Special magic swords
+                elif result == "special swords":
+                    magic_item = self.get_special_sword(max_experience)
 
-            # Standard misc weapons
-            elif result == "miscellaneous weapons":
-                magic_item = self.get_miscellaneous_weapon(self.roll_percentile(), self.roll_percentile())
+                # Standard misc weapons
+                elif result == "miscellaneous weapons":
+                    magic_item = self.get_miscellaneous_weapon(max_experience)
 
-            # Special misc weapons
-            elif result == "special miscellaneous weapons":
-                magic_item = self.get_special_miscellaneous_weapon(self.roll_percentile(), self.roll_percentile(), self.roll_percentile())
+                # Special misc weapons
+                elif result == "special miscellaneous weapons":
+                    magic_item = self.get_special_miscellaneous_weapon(max_experience)
 
-        # Armor and shields
-        elif magic_item_tier == "armor & shields":
-            result = self.get_armor_and_shields_category(self.roll_percentile())
+            # Armor and shields
+            elif magic_item_tier == "armor & shields":
+                result = self.get_armor_and_shields_category()
 
-            # Shields
-            if result == "shield":
-                magic_item = self.search_items(self.roll_percentile(), self.magic_item_tables["shield"])
+                # Shields
+                if result == "shield":
+                    roll = self.roll_percentile()
+                    magic_item = self.search_items(roll, self.magic_item_tables["shield"])
 
-                # Random shield types
-                if magic_item == "random shield type":
-                    magic_item = self.get_random_shield_type(self.roll_percentile())
-                
-                # Standard shield types
-                else:
-                    magic_item = self.get_shield(self.roll_percentile(), self.roll_percentile())
+                    # Random shield types
+                    if magic_item == "random shield type":
+                        magic_item = self.get_random_shield_type(max_experience)
+                    
+                    # Standard shield types
+                    else:
+                        magic_item = self.get_shield(max_experience)
 
-            # Armor
-            elif result == "armor":
-                magic_item = self.search_items(self.roll_percentile(), self.magic_item_tables["armor"])
+                # Armor
+                elif result == "armor":
+                    roll = self.roll_percentile()
+                    magic_item = self.search_items(roll, self.magic_item_tables["armor"])
 
-                # Random armor types
-                if magic_item == "random armor type":
-                    self.get_random_armor_type(self.roll_percentile())
+                    # Random armor types
+                    if magic_item == "random armor type":
+                        magic_item = self.get_random_armor_type(max_experience)
 
-                # Standard armor types
-                else:
-                    self.get_armor(self.roll_percentile(), self.roll_percentile())
+                    # Standard armor types
+                    else:
+                        magic_item = self.get_armor(max_experience)
 
-        # Misc magic items
-        elif magic_item_tier == "miscellaneous magic":
-            magic_item = self.get_miscellaneous_magic(self.roll_percentile(), self.roll_percentile())
+            # Misc magic items
+            elif magic_item_tier == "miscellaneous magic":
+                magic_item = self.get_miscellaneous_magic(max_experience)
 
-        # Rings
-        elif magic_item_tier == "rings":
-            magic_item = self.get_ring(self.roll_percentile())
+            # Rings
+            elif magic_item_tier == "rings":
+                magic_item = self.get_ring(max_experience)
 
-        # Rods, staves, and wands
-        elif magic_item_tier == "rods, staves, wands":
-            magic_item = self.get_rod_stave_wand(self.roll_percentile())
+            # Rods, staves, and wands
+            elif magic_item_tier == "rods, staves, wands":
+                magic_item = self.get_rod_stave_wand(max_experience)
 
-        # Cursed items
-        elif magic_item_tier == "cursed items":
-            magic_item = self.get_cursed_item(self.roll_percentile())
+            # Cursed items
+            elif magic_item_tier == "cursed items":
+                magic_item = self.get_cursed_item()
 
-        # Artifacts
-        elif magic_item_tier == "artifacts":
-            magic_item = self.get_artifact(self.roll_percentile())
+            # Artifacts
+            elif magic_item_tier == "artifacts":
+                magic_item = self.get_artifact(max_experience)
 
         return magic_item
