@@ -55,7 +55,14 @@ def main():
             while int(treasure_type) < 1 or int(treasure_type) > 18:
                 treasure_type = input("Select treasure type (1-18): ")
 
-            loot = treasure_table.roll_treasure(treasure_type)
+            monster_state = "0"
+            while int(monster_state) < 1 or int(monster_state) > 3:
+                print("1) Wandering Monster")
+                print("2) In Lair")
+                print("3) Hoarding")
+                monster_state = input("Select treasure type (1-3): ")
+
+            loot = treasure_table.roll_treasure(treasure_type, monster_state)
             item_banner = "\nYou found: \n" + loot + "\n"
         elif option == "2":
             loot = treasure_table.roll_gem()

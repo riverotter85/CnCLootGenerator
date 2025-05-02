@@ -29,8 +29,14 @@ class LootTable:
         return str(sum)
 
     @staticmethod
-    def roll_percentile():
-        return random.randint(1, 100)
+    def roll_percentile(num_times=1):
+        highest_roll = 100
+        for i in range(num_times):
+            roll = random.randint(1, 100)
+            if roll < highest_roll:
+                highest_roll = roll
+
+        return highest_roll
 
     @staticmethod
     def search_items(i, items):
